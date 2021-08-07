@@ -5,6 +5,7 @@ import { Loading } from './Loading';
 
 const Movies = () => {
   const history = useHistory();
+
   const { error, isLoading, movies } = useMovies();
 
   const handleMovieClick = (id) => () => history.push(`/${id}`);
