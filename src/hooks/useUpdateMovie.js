@@ -1,4 +1,6 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback } from 'react';
+
+import { httpClient } from 'httpClient';
 
 export const useUpdateMovie = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -8,9 +10,10 @@ export const useUpdateMovie = () => {
     try {
       setIsLoading(true);
 
-      await fetch(`http://localhost:8000/api/movies/${movieId}`, {
-        method: "PATCH",
-        body: JSON.stringify(movie),
+      await httpClient({
+        method: 'PATCH',
+        url: `http://localhost:8000/api/movies/${movieId}`,
+        data: movie,
       });
     } catch (error) {
       setError(error.message);

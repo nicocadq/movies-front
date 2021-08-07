@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
+
+import { httpClient } from 'httpClient';
 
 export const useMovie = ({ movieId }) => {
   const [movie, setMovie] = useState({});
@@ -10,13 +12,12 @@ export const useMovie = ({ movieId }) => {
       try {
         setIsLoading(true);
 
-        const response = await fetch(
-          `http://localhost:8000/api/movies/${movieId}`
-        );
+        const { data } = await httpClient({
+          method: 'GET',
+          url: `http://localhost:8000/api/movies/${movieId}`,
+        });
 
-        const responseData = await response.json();
-
-        setMovie(responseData?.data);
+        setMovie(data);
       } catch (error) {
         setError(error.message);
       } finally {

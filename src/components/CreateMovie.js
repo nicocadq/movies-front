@@ -27,4 +27,4 @@ const CreateMovie = () => {
   );
 };
 
-export { CreateMovie };
+export default CreateMovie;

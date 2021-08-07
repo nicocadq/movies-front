@@ -1,23 +1,28 @@
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { lazy, Suspense } from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import { Movies } from "./Movies";
-import { Movie } from "./Movie";
-import { CreateMovie } from "./CreateMovie";
+import { Loading } from 'components/Loading';
+
+const Movies = lazy(() => import('components/Movies'));
+const Movie = lazy(() => import('components/Movie'));
+const CreateMovie = lazy(() => import('components/CreateMovie'));
 
 const App = () => (
   <BrowserRouter>
-    <Switch>
-      <Route exact path="/">
-        <Movies />
-      </Route>
-      <Route exact path="/create-movie">
-        <CreateMovie />
-      </Route>
-      <Route exact path="/:id">
-        <Movie />
-      </Route>
-    </Switch>
+    <Suspense delayMs={500} fallback={<Loading />}>
+      <Switch>
+        <Route exact path="/">
+          <Movies />
+        </Route>
+        <Route exact path="/create-movie">
+          <CreateMovie />
+        </Route>
+        <Route exact path="/:id">
+          <Movie />
+        </Route>
+      </Switch>
+    </Suspense>
   </BrowserRouter>
 );
 
-export default App;
+export { App };

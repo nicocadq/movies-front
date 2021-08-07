@@ -1,9 +1,9 @@
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams } from 'react-router-dom';
 
-import { useMovie } from "./useMovie";
-import { useDeleteMovie } from "./useDeleteMovie";
-import { useUpdateMovie } from "./useUpdateMovie";
-import { Loading } from "./Loading";
+import { useMovie } from 'hooks/useMovie';
+import { useDeleteMovie } from 'hooks/useDeleteMovie';
+import { useUpdateMovie } from 'hooks/useUpdateMovie';
+import { Loading } from './Loading';
 
 const Movie = () => {
   const history = useHistory();
@@ -16,7 +16,7 @@ const Movie = () => {
   const onDeleteClick = async () => {
     await deleteMovie({ movieId: id });
 
-    history.push("/");
+    history.push('/');
   };
 
   // FIX: It is not working in the backend side
@@ -24,7 +24,7 @@ const Movie = () => {
   const onUpdateClick = async () => {
     await updateMovie({
       movieId: id,
-      movie: { ...movie, name: "Some different name" },
+      movie: { ...movie, name: 'Some different name' },
     });
 
     history.go();
@@ -56,4 +56,4 @@ const Movie = () => {
   );
 };
 
-export { Movie };
+export default Movie;

@@ -1,4 +1,6 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback } from 'react';
+
+import { httpClient } from 'httpClient';
 
 export const useDeleteMovie = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -8,8 +10,9 @@ export const useDeleteMovie = () => {
     try {
       setIsLoading(true);
 
-      await fetch(`http://localhost:8000/api/movies/${movieId}`, {
-        method: "DELETE",
+      await httpClient({
+        method: 'DELETE',
+        url: `http://localhost:8000/api/movies/${movieId}`,
       });
     } catch (error) {
       setError(error.message);

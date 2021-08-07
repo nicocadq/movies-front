@@ -1,7 +1,7 @@
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory } from 'react-router-dom';
 
-import { Loading } from "./Loading";
-import { useMovies } from "./useMovies";
+import { useMovies } from 'hooks/useMovies';
+import { Loading } from './Loading';
 
 const Movies = () => {
   const history = useHistory();
@@ -42,4 +42,4 @@ const Movies = () => {
   );
 };
 
-export { Movies };
+export default Movies;
