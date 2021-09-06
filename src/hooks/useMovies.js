@@ -28,5 +28,5 @@ export const useMovies = () => {
     fetchMovies();
   }, []);
 
-  return { error, isLoading, movies };
+  return { error, isLoading, movies, setMovies };
 };

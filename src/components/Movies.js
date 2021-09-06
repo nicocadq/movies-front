@@ -1,14 +1,29 @@
 import { Link, useHistory } from 'react-router-dom';
 
 import { useMovies } from 'hooks/useMovies';
+import { SearchMovie } from './SearchMovie';
 import { Loading } from './Loading';
 
 const Movies = () => {
   const history = useHistory();
 
-  const { error, isLoading, movies } = useMovies();
+  const { error, isLoading, movies, setMovies } = useMovies();
 
   const handleMovieClick = (id) => () => history.push(`/${id}`);
+
+  const handleOnSearch = (value) => {
+    let filteredMovies = [];
+
+    setMovies((previousState) => {
+      if (value) {
+        filteredMovies = previousState.filter((movie) => movie.id === value);
+
+        return filteredMovies.length > 0 ? filteredMovies : previousState;
+      }
+
+      return previousState;
+    });
+  };
 
   if (isLoading) return <Loading />;
 
@@ -16,6 +31,7 @@ const Movies = () => {
 
   return (
     <div className="bg-gray-100 min-h-screen py-16 px-8 flex flex-col">
+      <SearchMovie onSearch={handleOnSearch} />
       <Link
         to="/create-movie"
         className="p-6 bg-blue-600 text-white shadow-md rounded-lg"
@@ -30,7 +46,7 @@ const Movies = () => {
             onClick={handleMovieClick(id)}
             className="container mx-auto shadow-lg rounded-lg max-w-md hover:shadow-2xl transition duration-300 cursor-pointer"
           >
-            <img src={image} alt="" className="rounded-t-lg w-full" />
+            <img src={image} alt="Movie" className="rounded-t-lg w-full" />
             <div className="p-6">
               <h1 className="hover:text-indigo-600 transition duration-200 text-gray-900 ">
                 {name}
